@@ -1,6 +1,10 @@
 package data;
 
-public class Individual {
+import task.IIndividual;
+
+import java.util.Random;
+
+public class Individual  implements IIndividual {
 
     private static int counter = 0;
     private String name;
@@ -110,5 +114,28 @@ public class Individual {
         }
     }
 
+    @Override
+    public int calculateBMI() {
+        try {
+            double bmi = this.weight / (this.height * this.height);
+            return (int) Math.round(bmi);
+        } catch(ArithmeticException e) { //can put Exception when not sure, this case int divided by 0
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return -1;
+        }
+    }
+
+    @Override
+    public boolean isOverAge() {
+        return this.age >= 18;
+    }
+
+    @Override
+    public long generatePassword() {
+        Random r = new Random();
+        long passport = r.nextLong();
+        return passport;
+    }
 }
 
